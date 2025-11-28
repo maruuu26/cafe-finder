@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Cafe Finder</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header class="app-header">
+            <h1>Cafe Finder</h1>
+            <button class="secondary-btn" onclick="window.location.href='saved.html'">
+                Saved Cafes
+            </button>
+        </header>
+
+        <main class="app-main">
+            <section class="status">
+              <p id="status-text">Allow location access to find nearby cafes.</p>
+            </section>
+
+        <section class="card" id="cafe-card" hidden>
+            <h2 id="cafe-name"></h2>
+            <p id="cafe-address" class="muted"></p>
+            <p id="cafe-distance"></p>
+            <p id="cafe-category" class="tag"></p>
+
+            <div class="card-actions">
+                <button id="skip-btn" class="ghost-btn">Skip</button>
+                <button id="save-btn" class="primary-btn">Save Café</button>
+            </div>
+
+            <a id="map-link" href="#" target="_blank" rel="noopener" class="map-link">
+                View on Map
+            </a>
+        </section>
+
+        <section class="empty-state" id="empty-state" hidden>
+            <p>No more cafes found in this area.</p>
+            <button class="secondary-btn" id="retry-btn">Search Again</button>
+          </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>Data powered by Foursquare Places API.</p>
+        </footer>
+
+        <script src="config.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

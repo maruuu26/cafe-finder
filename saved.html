@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Saved Cafes | Café Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Saved Cafes</h1>
+    <button class="secondary-btn" onclick="window.location.href='index.html'">
+      Back to Finder
+    </button>
+  </header>
+
+  <main class="app-main">
+    <section id="saved-list" class="saved-list">
+      <!-- Filled dynamically -->
+    </section>
+
+    <section id="saved-empty" class="empty-state" hidden>
+      <p>You haven’t saved any cafes yet.</p>
+      <button class="primary-btn" onclick="window.location.href='index.html'">
+        Find Cafes
+      </button>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Data powered by Foursquare Places API.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="saved.js"></script>
+</body>
+</html>
