@@ -15,6 +15,9 @@ const mapLinkEl = document.getElementById("map-link");
 const saveBtn = document.getElementById("save-btn");
 const skipBtn = document.getElementById("skip-btn");
 
+const cafePhotoWrapper = document.getElementById("cafe-photo-wrapper");
+const cafePhotoEl = document.getElementById("cafe-photo");
+
 // ---------- STATE ----------
 let cafes = [];
 let currentIndex = 0;
@@ -61,7 +64,7 @@ async function fetchCafes(lat, lon) {
         "X-Goog-Api-Key": GOOGLE_PLACES_API_KEY,
         // field mask = which fields we want back
         "X-Goog-FieldMask":
-          "places.id,places.displayName,places.formattedAddress,places.location,places.types"
+          "places.id,places.displayName,places.formattedAddress,places.location,places.types,places.photos"
       },
       body: JSON.stringify(body)
     });
@@ -93,6 +96,7 @@ async function fetchCafes(lat, lon) {
 // ---------- UI: SHOW CURRENT CAFE ----------
 
 function showCurrentCafe() {
+  // No more cafes case
   if (currentIndex >= cafes.length) {
     openState(false, true, "You’ve browsed all cafes in this search.");
     return;
@@ -111,6 +115,23 @@ function showCurrentCafe() {
     category = category.charAt(0).toUpperCase() + category.slice(1);
   }
 
+  // --- Photo handling (Places Photos New) ---
+  let photoUrl = "";
+  if (place.photos && place.photos.length > 0) {
+    const photoName = place.photos[0].name; // e.g. "places/xxx/photos/yyy"
+    photoUrl = `https://places.googleapis.com/v1/${photoName}/media?maxWidthPx=900&key=${GOOGLE_PLACES_API_KEY}`;
+  }
+
+  if (photoUrl) {
+    cafePhotoEl.src = photoUrl;
+    cafePhotoEl.alt = `Photo of ${name}`;
+    cafePhotoWrapper.hidden = false;
+  } else {
+    // no photo: hide image area but keep card clean
+    cafePhotoWrapper.hidden = true;
+  }
+
+  // --- Text + map link ---
   cafeNameEl.textContent = name;
   cafeAddressEl.textContent = address;
   cafeDistanceEl.textContent = "Near your location";
